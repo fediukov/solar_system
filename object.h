@@ -63,33 +63,3 @@ private:
 	double siderial_ = 0;
 	Date equinox_ = Date(1, 1, 2000);
 };
-
-
-/*class Object
-{
-public:
-	Object() = default;
-
-	// sets
-	Object& SetName(std::string&& name);
-	Object& SetSystem(Object* parent);
-	Object& SetRadius(int radius);
-	Object& SetDistanceKm(int distance);
-	Object& SetDistanceAu(double distance);
-	Object& SetSiderial(double siderial);
-	Object& SetEquinox(const std::string& equinox);
-
-	// gets
-	const std::string GetName() const;
-	const int GetRadius() const;
-	const double GetDistance();
-	const Position GetPosition(int time);
-
-private:
-	std::string name_ = "";
-	Object* parent_;
-	int radius_ = 0;
-	Distance distance_;
-	double siderial_ = 0;
-	Date equinox_ = Date(1,1,2000);
-};//*/
