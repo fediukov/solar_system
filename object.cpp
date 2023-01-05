@@ -1,19 +1,19 @@
 #include "object.h"
 
 // --- sets -------------------------------------------------------------------
-Solar& Solar::SetName(const std::string& name)
+Star& Star::SetName(const std::string& name)
 {
 	name_ = name;
 	return *this;
 }
 
-Solar& Solar::SetRadius(int radius)
+Star& Star::SetRadius(int radius)
 {
 	radius_ = radius;
 	return *this;
 }
 
-Solar& Solar::SetPosition(const Position& position)
+Star& Star::SetPosition(const Position& position)
 {
 	pos_ = position;
 	return *this;
@@ -62,17 +62,17 @@ Planet& Planet::SetEquinox(const std::string& equinox)
 }
 
 // --- gets -------------------------------------------------------------------
-int Solar::Time(const Date& date)
+int Star::Time(const Date& date)
 {
 	return 0;
 }
 
-const std::string Solar::GetName()
+const std::string Star::GetName()
 {
 	return name_;
 }
 
-const Position Solar::GetPosition(const Date& date)
+const Position Star::GetPosition(const Date& date)
 {
 	return pos_;
 }

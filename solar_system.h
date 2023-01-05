@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iomanip>
 #include <memory>
 #include <string>
 #include <vector>
@@ -25,7 +26,7 @@ SolarSystem CreateSolarSystem()
 	SolarSystem solar_system;
 
 	// create the sun
-	std::unique_ptr<Solar> sun = std::make_unique<Solar>();
+	std::unique_ptr<Star> sun = std::make_unique<Star>();
 	sun->SetName("Sun")
 		.SetRadius(695500)
 		.SetPosition({ 0,0 });
@@ -76,4 +77,13 @@ SolarSystem CreateSolarSystem()
 	}
 
 	return solar_system;
+}
+
+void PrintSystem(SolarSystem& system, const Date& date)
+{
+	for (const auto& object : system)
+	{
+		std::cout << object->GetName()
+			<< std::setprecision(6) << "\t{x,y} = " << object->GetPosition(date) << std::endl;
+	}
 }

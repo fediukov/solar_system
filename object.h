@@ -21,20 +21,20 @@ public:
 private:
 };
 
-class Solar : public Object {
+class Star : public Object {
 public:
-	Solar() : Object() {}
+	Star() : Object() {}
 
-	Solar& SetPosition(const Position& position);
-	Solar& SetName(const std::string& name) override;
-	Solar& SetRadius(int radius) override;
+	Star& SetPosition(const Position& position);
+	Star& SetName(const std::string& name) override;
+	Star& SetRadius(int radius) override;
 
 	int Time(const Date& date) override;
 	const Position GetPosition(const Date& date) override;
 	const std::string GetName() override;
 
 private:
-	std::string name_ = "";
+	std::string name_;
 	int radius_ = 0;
 	Position pos_ = { 0,0 };
 };
@@ -56,7 +56,7 @@ public:
 	const std::string GetName() override;
 
 private:
-	std::string name_ = "";
+	std::string name_;
 	Object* parent_ = nullptr;
 	int radius_ = 0;
 	Distance distance_;
