@@ -50,9 +50,9 @@ private:
 	void Parse(const std::string& date);
 
 private:
-	int day_;
-	int month_;
-	int year_;
+	int day_ = 1;
+	int month_ = 1;
+	int year_ = 2000;
 };
 
 bool operator==(const Date& lhs, const Date& rhs);

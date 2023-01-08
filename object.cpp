@@ -1,6 +1,6 @@
 #include "object.h"
 
-// --- sets -------------------------------------------------------------------
+// --- Star -------------------------------------------------------------------
 Star& Star::SetName(const std::string& name)
 {
 	name_ = name;
@@ -19,9 +19,37 @@ Star& Star::SetPosition(const Position& position)
 	return *this;
 }
 
+int Star::Time(const Date& date)
+{
+	return 0;
+}
+
+const Position Star::GetPosition(const Date& date)
+{
+	return pos_;
+}
+
+const std::string Star::GetName()
+{
+	return name_;
+}
+
+Object* Star::GetParent()
+{
+	return nullptr;
+}
+
+
+const Distance Star::GetDistance()
+{
+	Distance distance(0);
+	return distance;
+}
+
+// --- Planet -----------------------------------------------------------------
 Planet& Planet::SetName(const std::string& name)
 {
-	name_ = std::move(name);
+	name_ = name;
 	return *this;
 }
 
@@ -61,30 +89,9 @@ Planet& Planet::SetEquinox(const std::string& equinox)
 	return *this;
 }
 
-// --- gets -------------------------------------------------------------------
-int Star::Time(const Date& date)
-{
-	return 0;
-}
-
-const std::string Star::GetName()
-{
-	return name_;
-}
-
-const Position Star::GetPosition(const Date& date)
-{
-	return pos_;
-}
-
 int Planet::Time(const Date& date)
 {
 	return static_cast<int>(Difference(date, equinox_));
-}
-
-const std::string Planet::GetName()
-{
-	return name_;
 }
 
 const Position Planet::GetPosition(const Date& date)
@@ -95,4 +102,19 @@ const Position Planet::GetPosition(const Date& date)
 	double x = distance_.AU() * std::cos(rad);
 	double y = distance_.AU() * std::sin(rad);
 	return { x + parent_->GetPosition(date).x, y + parent_->GetPosition(date).y };
-}//*/
+}
+
+const std::string Planet::GetName()
+{
+	return name_;
+}
+
+Object* Planet::GetParent()
+{
+	return parent_;
+}
+
+const Distance Planet::GetDistance()
+{
+	return distance_;
+}
