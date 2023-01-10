@@ -3,9 +3,11 @@
 #include <algorithm>
 #include <iomanip>
 #include <memory>
+#include <stack>
 #include <unordered_map>
 #include <vector>
 
+#include "date.h"
 #include "object.h"
 
 class System {
@@ -18,10 +20,14 @@ public:
 	void Print(const Date& date);
 
 private:
-	void Sort();
+
+	void SortByParent();
+	void SortByDistance(std::vector<Object*>& objects);
+	std::vector<Object*> GetChildren(const std::string& name);
+	std::vector<Object*> GetAllChildren(const std::string& name);
 
 private:
-	std::vector<std::string> objects_;
 	std::unordered_map<std::string, std::unique_ptr<Object>> name_object_map_;
-
+	std::vector<Object*> objects_;
+	bool is_sorted_ = false;
 };
