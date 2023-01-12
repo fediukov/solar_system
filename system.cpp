@@ -3,23 +3,24 @@
 void System::AddObject(std::unique_ptr<Star>&& star)
 {
 	std::string name = star->GetName();
-	name_object_map_[name] = std::move(star);
-	objects_.push_back(name_object_map_.at(name).get());
+	objects_[name] = std::move(star);
+	object_list_.push_back(objects_.at(name).get());
 	is_sorted_ = false;
 }
 
 void System::AddObject(std::unique_ptr<Planet>&& planet)
 {
 	std::string name = planet->GetName();
-	name_object_map_[name] = std::move(planet);
-	objects_.push_back(name_object_map_.at(name).get());
+	objects_[name] = std::move(planet);
+	children_[objects_.at(name)->GetParent()->GetName()].push_back(objects_.at(name).get());
+	object_list_.push_back(objects_.at(name).get());
 	is_sorted_ = false;
 }
 
 Object* System::GetParent(const std::string& name)
 {
-	auto it = name_object_map_.find(name);
-	if (it != name_object_map_.end())
+	auto it = objects_.find(name);
+	if (it != objects_.end())
 	{
 		return it->second.get();
 	}
@@ -34,7 +35,7 @@ void System::Print(const Date& date)
 		SortByParent();
 	}
 
-	for (const auto& object : objects_)
+	for (const auto& object : object_list_)
 	{
 		std::cout << object->GetName()
 			<< std::setprecision(6) << "\t{x,y} = " << object->GetPosition(date)
@@ -45,7 +46,7 @@ void System::Print(const Date& date)
 void System::SortByParent()
 {
 	std::vector<Object*> objects;
-	for (auto it = name_object_map_.begin(); it != name_object_map_.end(); ++it)
+	for (auto it = objects_.begin(); it != objects_.end(); ++it)
 	{
 		Object* parent = (*it).second->GetParent();
 		if (parent == nullptr)
@@ -56,7 +57,7 @@ void System::SortByParent()
 		}
 	}
 
-	objects_ = std::move(objects);
+	object_list_ = std::move(objects);
 	is_sorted_ = true;
 }
 
@@ -73,29 +74,30 @@ void System::SortByDistance(std::vector<Object*>& objects)
 
 std::vector<Object*> System::GetChildren(const std::string& name)
 {
-	std::vector<Object*> children;
-	for (auto it = name_object_map_.begin(); it != name_object_map_.end(); ++it)
-	{
-		Object* parent = it->second.get()->GetParent();
-		if (parent != nullptr && parent->GetName() == name)
-		{
-			children.push_back(it->second.get());
-		}
-	}
 
-	SortByDistance(children);
-	return children;
+	auto it = children_.find(name);
+	if (it != children_.end())
+	{
+		SortByDistance((*it).second);
+		return (*it).second;
+	}
+	return {};
 }
 
 std::vector<Object*> System::GetAllChildren(const std::string& name)
 {
-	std::vector<Object*> children = std::move(GetChildren(name));
-	for (auto it = children.begin(); it != children.end(); ++it)
+	std::vector<Object*> all_children;
+	std::vector<Object*> children = GetChildren(name);
+	for (auto child : children)
 	{
-		std::vector<Object*> children_children = GetAllChildren((*it)->GetName());
-		children.insert(std::next(it, 1), children_children.begin(), children_children.end());
+		std::vector<Object*> children_children = GetAllChildren(child->GetName());
+		all_children.push_back(std::move(child));
+		for (auto child_child : children_children)
+		{
+			all_children.push_back(std::move(child_child));
+		}
 	}
 
-	return children;
+	return all_children;
 }
 

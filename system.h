@@ -27,7 +27,8 @@ private:
 	std::vector<Object*> GetAllChildren(const std::string& name);
 
 private:
-	std::unordered_map<std::string, std::unique_ptr<Object>> name_object_map_;
-	std::vector<Object*> objects_;
+	std::unordered_map<std::string, std::unique_ptr<Object>> objects_;
+	std::unordered_map<std::string, std::vector<Object*>> children_;
+	std::vector<Object*> object_list_;
 	bool is_sorted_ = false;
 };
