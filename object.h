@@ -6,6 +6,16 @@
 #include "common.h"
 #include "date.h"
 
+namespace direction
+{
+	enum Direction {
+		forward,
+		reverse
+	};
+} // namespace direction
+
+using namespace direction;
+
 class Object {
 public:
 	Object() {};
@@ -54,6 +64,7 @@ public:
 	Planet& SetDistanceAu(double distance);
 	Planet& SetSiderial(double siderial);
 	Planet& SetEquinox(const std::string& equinox);
+	Planet& SetDirection(const Direction direction);
 
 	int Time(const Date& date) override;
 	const Position GetPosition(const Date& date) override;
@@ -68,4 +79,5 @@ private:
 	Distance distance_;
 	double siderial_ = 0;
 	Date equinox_ = Date(1, 1, 2000);
+	Direction direction_ = forward;
 };

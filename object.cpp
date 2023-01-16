@@ -89,6 +89,12 @@ Planet& Planet::SetEquinox(const std::string& equinox)
 	return *this;
 }
 
+Planet& Planet::SetDirection(const Direction direction)
+{
+	direction_ = direction;
+	return *this;
+}
+
 int Planet::Time(const Date& date)
 {
 	return static_cast<int>(Difference(date, equinox_));
@@ -101,6 +107,7 @@ const Position Planet::GetPosition(const Date& date)
 	double rad = DegToRad(alfa);
 	double x = distance_.AU() * std::cos(rad);
 	double y = distance_.AU() * std::sin(rad);
+	y = direction_ == forward ? y : y *= -1;
 	return { x + parent_->GetPosition(date).x, y + parent_->GetPosition(date).y };
 }
 
