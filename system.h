@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <iomanip>
 #include <memory>
-#include <stack>
 #include <unordered_map>
 #include <vector>
 

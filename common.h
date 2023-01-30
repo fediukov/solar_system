@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
+#include <string>
 #include <vector>
 
 // --- constants --------------------------------------------------------------
@@ -16,6 +17,7 @@ namespace CONSTS
 // --- common functions -------------------------------------------------------
 double RoundUp(double alfa);
 double DegToRad(double alfa);
+std::string DoubleToString(double value, bool sign, int before_point, int after_point);
 
 // --- class Position ---------------------------------------------------------
 struct Position {

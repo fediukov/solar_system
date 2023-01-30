@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 
 #include "date.h"
-#include "object.h"
 #include "solar_system.h"
 #include "system.h"
 #include "test_date.h"
