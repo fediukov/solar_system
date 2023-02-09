@@ -6,10 +6,10 @@
 #include "test_date.h"
 
 int main()
-{
+{      
     // uncomment the following to test date
     //date_tests::AllTests();
-
+    
     System solar_system = std::move(CreateSolarSystem());
 
     std::cout << "Commands: DD.MM.YYYY (date in this format)     next    prev    end" << std::endl;

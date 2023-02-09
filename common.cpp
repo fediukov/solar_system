@@ -18,22 +18,21 @@ double DegToRad(double alfa)
 std::string DoubleToString(double value, bool sign, int before_point, int after_point)
 {
 	std::string result;
+	char sign_char;
 	if (value < 0)
 	{
-		result += "-";
+		sign_char = '-';
 		value *= -1.;
+	}
+	else if (sign)
+	{
+		sign_char = '+';
 	}
 	else
 	{
-		if (sign)
-		{
-			result += "+";
-		}
-		else
-		{
-			result += " ";
-		}
+		sign_char = ' ';
 	}
+
 	int int_part = static_cast<int>(value);
 	std::vector<int> int_part_digits;
 	while (int_part)
@@ -41,10 +40,15 @@ std::string DoubleToString(double value, bool sign, int before_point, int after_
 		int_part_digits.push_back(int_part % 10);
 		int_part /= 10;
 	}
-	while (int_part_digits.size() < before_point)
+	if (int_part_digits.empty())
 	{
 		int_part_digits.push_back(0);
 	}
+	for (int i = 0; i < before_point - int_part_digits.size(); ++i)
+	{
+		result += ' ';
+	}
+	result += sign_char;
 	for (int i = int_part_digits.size() - 1; i >= 0; --i)
 	{
 		result += std::to_string(int_part_digits.at(i));
