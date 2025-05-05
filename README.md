@@ -53,14 +53,14 @@ Solar System - это бэкенд-реализация на C++ модели с
 Если вы используете `vcpkg`, выполните:
 
 ```bash
-vcpkg install qtbase qtdeclarative qtquickcontrols2
+vcpkg install qtbase qtdeclarative qtquickcontrols2```
 
 И добавьте путь к QML-модулям в main.cpp, чтобы приложение находило их:
 
 ```main.cpp
-engine.addImportPath("C:/Users/<user_name>/vcpkg/installed/x64-windows/Qt6/qml");
+engine.addImportPath("C:/Users/<user_name>/vcpkg/installed/x64-windows/Qt6/qml");```
 
-❗️ **Важно**: замените <user_name> на ваше имя пользователя в системе или замените путь полностью, если vcpkg и qt был утсановлен по другому пути.
+**Важно**: замените <user_name> на ваше имя пользователя в системе или замените путь полностью, если vcpkg и qt был утсановлен по другому пути.
 
 ### Сборка
 
