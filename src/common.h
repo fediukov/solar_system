@@ -36,7 +36,7 @@ public:
 
 	void SetDistanceKm(int distance);
 	void SetDistanceAu(double distance);
-	double AU();
+	double AU() const;
 
 private:
 	double distance_ = 0; // distance in au

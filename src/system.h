@@ -15,6 +15,7 @@ public:
 	void AddObject(std::unique_ptr<Planet>&& object);
 
 	Object* GetParent(const std::string& name);
+	const std::vector<Object*>& GetObjects();
 
 	void Print(const Date& date);
 

@@ -19,17 +19,17 @@ Star& Star::SetPosition(const Position& position)
 	return *this;
 }
 
-int Star::Time(const Date& date)
+int Star::Time(const Date& date) const
 {
 	return 0;
 }
 
-const Position Star::GetPosition(const Date& date)
+const Position Star::GetPosition(const Date& date) const
 {
 	return pos_;
 }
 
-const std::string Star::GetName()
+const std::string Star::GetName() const
 {
 	return name_;
 }
@@ -40,7 +40,7 @@ Object* Star::GetParent()
 }
 
 
-const Distance Star::GetDistance()
+const Distance Star::GetDistance() const
 {
 	Distance distance(0);
 	return distance;
@@ -95,12 +95,12 @@ Planet& Planet::SetDirection(const Direction direction)
 	return *this;
 }
 
-int Planet::Time(const Date& date)
+int Planet::Time(const Date& date) const
 {
 	return static_cast<int>(Difference(date, equinox_));
 }
 
-const Position Planet::GetPosition(const Date& date)
+const Position Planet::GetPosition(const Date& date) const
 {
 	int time = Time(date);
 	double alfa = time * 360 / siderial_;
@@ -111,7 +111,7 @@ const Position Planet::GetPosition(const Date& date)
 	return { x + parent_->GetPosition(date).x, y + parent_->GetPosition(date).y };
 }
 
-const std::string Planet::GetName()
+const std::string Planet::GetName() const
 {
 	return name_;
 }
@@ -121,7 +121,7 @@ Object* Planet::GetParent()
 	return parent_;
 }
 
-const Distance Planet::GetDistance()
+const Distance Planet::GetDistance() const 
 {
 	return distance_;
 }

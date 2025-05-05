@@ -1,44 +1,26 @@
-﻿#include <iostream>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 
-#include "date.h"
-#include "solar_system.h"
-#include "system.h"
-#include "test_date.h"
+#include "system_qt_wrapper.h"
 
-int main()
-{      
-    // uncomment the following to test date
-    //date_tests::AllTests();
-    
-    System solar_system = std::move(CreateSolarSystem());
+int main(int argc, char* argv[])
+{
+    QGuiApplication app(argc, argv);
+    QQmlApplicationEngine engine;
 
-    std::cout << "Commands: DD.MM.YYYY (date in this format)     next    prev    end" << std::endl;
-    
-    Date date;
-    while (true)
-    {
-        std::string command;
-        std::getline(std::cin, command);
-        if (command == "next")
-        {
-            ++date;
-            solar_system.Print(date);
-        }
-        else if (command == "prev")
-        {
-            --date;
-            solar_system.Print(date);
-        }
-        else if (command == "end")
-        {
-            break;
-        }
-        else
-        {
-            date = Date(command);
-            solar_system.Print(date);
-        }
-    }
-    
-    std::cout << std::endl;
+    const QUrl url(u"qrc:/qml/main.qml"_qs);
+    engine.addImportPath("C:/Users/sf/vcpkg/installed/x64-windows/Qt6/qml");
+
+    SystemQtWrapper* wrapper = new SystemQtWrapper();
+    engine.rootContext()->setContextProperty("SolarSystem", wrapper);
+
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+    if (engine.rootObjects().isEmpty())
+        return -1;
+
+
+    return app.exec();
 }

@@ -25,7 +25,7 @@ struct ObjectHelper {
 	direction::Direction direction_ = direction::Direction::forward;
 };
 
-System CreateSolarSystem()
+inline System CreateSolarSystem()
 {
 	using direction::Direction;
 

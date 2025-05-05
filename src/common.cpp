@@ -85,7 +85,7 @@ void Distance::SetDistanceAu(double distance)
 	distance_ = distance;
 }
 
-double Distance::AU()
+double Distance::AU() const
 {
 	return distance_;
 }

@@ -24,11 +24,11 @@ public:
 	virtual Object& SetName(const std::string& name) = 0;
 	virtual Object& SetRadius(int radius) = 0;
 
-	virtual int Time(const Date& date) = 0;
-	virtual const Position GetPosition(const Date& date) = 0;
-	virtual const std::string GetName() = 0;
+	virtual int Time(const Date& date) const = 0;
+	virtual const Position GetPosition(const Date& date) const = 0;
+	virtual const std::string GetName() const = 0;
 	virtual Object* GetParent() = 0;
-	virtual const Distance GetDistance() = 0;
+	virtual const Distance GetDistance() const = 0;
 
 private:
 };
@@ -41,11 +41,11 @@ public:
 	Star& SetName(const std::string& name) override;
 	Star& SetRadius(int radius) override;
 
-	int Time(const Date& date) override;
-	const Position GetPosition(const Date& date) override;
-	const std::string GetName() override;
+	int Time(const Date& date) const override;
+	const Position GetPosition(const Date& date) const override;
+	const std::string GetName() const override;
 	Object* GetParent() override;
-	const Distance GetDistance() override;
+	const Distance GetDistance() const override;
 
 private:
 	std::string name_;
@@ -66,11 +66,11 @@ public:
 	Planet& SetEquinox(const std::string& equinox);
 	Planet& SetDirection(const Direction direction);
 
-	int Time(const Date& date) override;
-	const Position GetPosition(const Date& date) override;
-	const std::string GetName() override;
+	int Time(const Date& date) const override;
+	const Position GetPosition(const Date& date) const override;
+	const std::string GetName() const override;
 	Object* GetParent() override;
-	const Distance GetDistance() override;
+	const Distance GetDistance() const override;
 
 private:
 	std::string name_;

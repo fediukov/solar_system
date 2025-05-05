@@ -28,6 +28,12 @@ Object* System::GetParent(const std::string& name)
 	return nullptr;
 }
 
+const std::vector<Object*>& System::GetObjects()
+{
+	if (!is_sorted_) SortByParent();
+	return object_list_;
+}
+
 void System::Print(const Date& date)
 {
 	if (!is_sorted_)
