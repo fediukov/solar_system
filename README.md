@@ -53,12 +53,14 @@ Solar System - это бэкенд-реализация на C++ модели с
 Если вы используете `vcpkg`, выполните:
 
 ```bash
-vcpkg install qtbase qtdeclarative qtquickcontrols2```
+vcpkg install qtbase qtdeclarative qtquickcontrols2
+```
 
 И добавьте путь к QML-модулям в main.cpp, чтобы приложение находило их:
 
 ```main.cpp
-engine.addImportPath("C:/Users/<user_name>/vcpkg/installed/x64-windows/Qt6/qml");```
+engine.addImportPath("C:/Users/<user_name>/vcpkg/installed/x64-windows/Qt6/qml");
+```
 
 **Важно**: замените <user_name> на ваше имя пользователя в системе или замените путь полностью, если vcpkg и qt был утсановлен по другому пути.
 
@@ -69,21 +71,25 @@ engine.addImportPath("C:/Users/<user_name>/vcpkg/installed/x64-windows/Qt6/qml")
 ```bash
 git clone https://github.com/fediukov/solar_system.git
 cd solar_system
+```
 
 #### Создайте и перейдите в папку для сборки:
 
 ```bash
 mkdir build && cd build
+```
 
 #### Настройте CMake:
 
 ```bash
 cmake .. -DCMAKE_TOOLCHAIN_FILE=[путь_до_vcpkg]/scripts/buildsystems/vcpkg.cmake
+```
 
 #### Соберите проект:
 
 ```bash
 cmake --build .
+```
 
 #### Подготовка к запуску (Windows) через windeployqt:
 
@@ -93,11 +99,13 @@ cmake --build .
 
 ```bash
 C:\Qt\6.5.2\msvc2019_64\bin\windeployqt.exe
+```
 
 Запустите windeployqt:
 
 ```bash
 windeployqt --qmldir ../../qml <path_to_exe>
+```
 
 где:
 ../../qml - относительный путь до папки qml в Qt,
