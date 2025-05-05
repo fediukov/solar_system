@@ -82,8 +82,11 @@ mkdir build && cd build
 #### Настройте CMake:
 
 ```bash
-cmake .. -DCMAKE_TOOLCHAIN_FILE=[путь_до_vcpkg]/scripts/buildsystems/vcpkg.cmake
+cmake .. -DCMAKE_TOOLCHAIN_FILE=<path_to_vcpkg>/scripts/buildsystems/vcpkg.cmake
 ```
+
+где:
+<path_to_vcpkg> - путь до vcpkg
 
 #### Соберите проект:
 
@@ -113,7 +116,7 @@ windeployqt --qmldir ../../qml <path_to_exe>
 
 Проверьте, что рядом с .exe появились каталоги qml, platforms, .dll-библиотеки и другое.
 
-#### Запустите приложение.
+#### Запустите приложение
 
 Запустить можно .exe прямо из проводника.
 Если возникают ошибки с модулями QML — проверьте, добавлен ли правильный путь в addImportPath и установлены ли нужные Qt-компоненты.
