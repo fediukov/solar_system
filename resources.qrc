@@ -1,6 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
+		<file>qml/components/ActionButton.qml</file>
+		<file>qml/components/CloseButton.qml</file>
+		<file>qml/components/DateLabel.qml</file>
         <file>qml/components/SolarCanvas.qml</file>
     </qresource>
 </RCC>
