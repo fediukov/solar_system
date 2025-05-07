@@ -21,8 +21,9 @@ ApplicationWindow {
         onClicked: Qt.quit()
     }
 
-    // ====== labels and buttons field ============================================================
+    // ====== date labels and date buttons field ==================================================
     Row {
+        id: dateRow
         spacing: 20
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
@@ -31,7 +32,14 @@ ApplicationWindow {
         // ===== prev button =====
         ActionButton {
             label: "Prev"
-            onClicked: SolarSystem.PrevDate();
+            onClicked: {
+                if (startStopButton.isRunning)
+                {
+                    startStopButton.isRunning = false
+                    runningTimer.stop()
+                }
+                SolarSystem.PrevDate();
+            }
         }
 
         // ===== date text ======
@@ -43,7 +51,35 @@ ApplicationWindow {
         // ===== next button =====
        ActionButton {
             label: "Next"
-            onClicked: SolarSystem.NextDate();
+            onClicked: {
+                if (startStopButton.isRunning)
+                {
+                    startStopButton.isRunning = false
+                    runningTimer.stop()
+                }
+                SolarSystem.NextDate();
+            }
+        }
+    }
+
+    // ===== start/stop row =======================================================================
+    Row {
+        id: startRow
+        spacing: 20
+        anchors.left: dateRow.right
+        anchors.verticalCenter: dateRow.verticalCenter
+        anchors.leftMargin: 20
+
+        // ===== start/stop button =====
+        StartStopButton {
+            id: startStopButton
+            onToggled: (running) => {
+                if (running) {
+                    runningTimer.start()
+                } else {
+                    runningTimer.stop()
+                }
+            }
         }
     }
 
@@ -61,6 +97,15 @@ ApplicationWindow {
         color: "#77bbbbbb"
     }
 
+    // ===== timers ===============================================================================
+    Timer {
+        id: runningTimer
+        interval: 100
+        repeat: true
+        running: false
+        onTriggered: SolarSystem.NextDate()
+    }
+    
     // ===== connections ==========================================================================
     Connections {
         target: SolarSystem

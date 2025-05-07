@@ -2,8 +2,8 @@ import QtQuick
 
 Rectangle {
     id: label
-	width: 100
-    height: 40
+	width: 80
+    height: 36
     color: "transparent"
 
     property string text: "-"
@@ -12,6 +12,6 @@ Rectangle {
         id: dateText
         anchors.centerIn: parent
         text: label.text
-        color: "lightblue"
+        color: "#508cd0"
     }
 }

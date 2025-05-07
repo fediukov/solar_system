@@ -8,16 +8,17 @@ Rectangle {
 	color: "#306cb0"
 	opacity: 0.6
 
-	property string label: "button"
+	property bool isRunning: false
 	property int pressedOffsetX: 0
 	property int pressedOffsetY: 0
-	signal clicked
+
+	signal toggled(bool running)
 
 	Text {
 		id: text
 		x: (button.width - width) / 2 + button.pressedOffsetX
 		y: (button.height - height) / 2 + button.pressedOffsetY
-		text: button.label
+		text: button.isRunning ? "Stop" : "Start"
 		color: "#cccccc"
 	}
 
@@ -25,11 +26,6 @@ Rectangle {
 		id: mouse
 		anchors.fill: parent
 		hoverEnabled: true
-
-		function stopTimers() {
-			initTimer.stop()
-			holdTimer.stop()
-		}
 
 		function setEnteredCondition() {
 			button.color = "#2864a8"
@@ -56,35 +52,18 @@ Rectangle {
 		onExited: {
 			setExitedCondition()
 		}
-
 		onPressed: {
 			setPressedCondition()
-			button.clicked()
-			initTimer.start()
 		}
 		onReleased: {
 			setEnteredCondition()
-			stopTimers()
 		}
 		onCanceled: {
 			setEnteredCondition()
-			stopTimers()
 		}
-	}
-
-	Timer {
-		id: initTimer
-		interval: 400
-		repeat: false
-		running: false
-		onTriggered: holdTimer.start()
-	}
-	
-	Timer {
-		id: holdTimer
-		interval: 100
-		repeat: true
-		running: false
-		onTriggered: button.clicked()
+		onClicked: {
+			isRunning = !isRunning;
+			toggled(isRunning);
+		}
 	}
 }
